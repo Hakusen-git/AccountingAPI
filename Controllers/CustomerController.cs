@@ -47,7 +47,7 @@ namespace AccountingAPI.Controllers
             _context.Customer.Add(customer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCustomer", new { id = customer.Accounts }, customer);
+            return CreatedAtAction("GetAccounts", new { id = customer.Accounts }, customer);
         }
 
         

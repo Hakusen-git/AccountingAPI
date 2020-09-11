@@ -17,14 +17,16 @@ namespace AccountingAPI
 {
     public class Startup
     {
-        private readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+
         public IConfiguration Configuration { get; }
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -36,13 +38,12 @@ namespace AccountingAPI
                 option.SwaggerDoc(name: "v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My API", Version = "v1" });
             });
 
-            services.AddCors(options =>
+            services.AddCors(options => 
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:3000",
-                            "hostUrl")
+                        builder.WithOrigins("https://localhost:3000")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                     });

@@ -19,6 +19,8 @@ namespace AccountingAPI.Models
         [Required]
         public string AccountLabel { get; set; }
         [Required]
+        public int AccountAmount { get; set; }
+        [Required]
         public DateTime AccountDate { get; set; }
 
         [Required]

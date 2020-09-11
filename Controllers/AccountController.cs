@@ -64,5 +64,45 @@ namespace AccountingAPI.Controllers
 
             return CreatedAtAction("AddAccount", new { id = account.AccountID}, account);
         }
+
+        [HttpPut]
+        [Route("UpdateAccount")]
+        public async Task<ActionResult> UpdateAccount(int id, Account account)
+        {
+            if(id != account.AccountID)
+            {
+                return BadRequest();
+            }
+
+            if(! _context.Account.Any(e => e.AccountID == id)){
+                return BadRequest();
+            }
+
+            var updateAccount = await _context.Account.FirstOrDefaultAsync(s => (s.AccountID == account.AccountID));
+            _context.Entry(updateAccount).State = EntityState.Modified;
+
+            updateAccount.AccountType = account.AccountType;
+            updateAccount.AccountLabel = account.AccountLabel;
+            updateAccount.AccountDate = account.AccountDate;
+            updateAccount.AccountAmount = account.AccountAmount;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Account.Any(e => e.AccountID == id))
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    throw;
+                }
+
+            }
+            return NoContent();
+        }
     }
 }
