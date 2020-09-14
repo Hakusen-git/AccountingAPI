@@ -45,6 +45,7 @@ namespace AccountingAPI
                     {
                         builder.WithOrigins("https://localhost:3000")
                         .AllowAnyHeader()
+                        .AllowAnyOrigin()
                         .AllowAnyMethod();
                     });
             });

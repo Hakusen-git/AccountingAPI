@@ -57,8 +57,9 @@ namespace AccountingAPI.Controllers
 
         [HttpPost]
         [Route("AddAccount")]
-        public async Task<ActionResult<Account>> AddAccount(Account account)
+        public async Task<ActionResult<Account>> AddAccount(int id, Account account)
         {
+            account.CustomerID = id;
             _context.Account.Add(account);
             await _context.SaveChangesAsync();
 

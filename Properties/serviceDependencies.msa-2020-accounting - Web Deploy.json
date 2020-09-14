@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "mssql1": {
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.Sql/servers/accountingapi/databases/accounting-api",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.Sql/servers/accounting-api/databases/accounting-data",
       "type": "mssql.azure",
       "connectionId": "sqlDatabase",
       "secretStore": "AzureAppSettings"

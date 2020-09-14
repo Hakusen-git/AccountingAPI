@@ -14,6 +14,9 @@ namespace AccountingAPI.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CustomerID { get; set; }
 
+        [Required]
+        public string CustomerLabel { get; set; }
+
         public ICollection<Account> Accounts { get; set; }
     }
 }

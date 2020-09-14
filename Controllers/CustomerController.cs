@@ -39,6 +39,31 @@ namespace AccountingAPI.Controllers
             return customer;
         }
 
+        [HttpDelete]
+        [Route("DeleteCustomer")]
+        public async Task<ActionResult<Customer>> DeleteCustomer(int id)
+        {
+            var customer = await _context.Customer.FindAsync(id);
+
+            if(customer == null)
+            {
+                return NotFound();
+            }
+
+            _context.Customer.Remove(customer);
+
+            await _context.SaveChangesAsync();
+
+            return customer;
+        }
+
+        [HttpGet]
+        [Route("GetCustomers")]
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        {
+            return await _context.Customer.ToListAsync();
+        }
+
 
         [HttpPost]
         [Route("AddCustomer")]
