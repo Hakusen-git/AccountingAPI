@@ -12,7 +12,7 @@ namespace AccountingAPI.Models
         [Required]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CustomerID { get; set; }
+        public string CustomerID { get; set; }
 
         [Required]
         public string CustomerLabel { get; set; }

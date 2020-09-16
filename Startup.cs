@@ -50,6 +50,8 @@ namespace AccountingAPI
                     });
             });
 
+            services.AddSignalR();
+
             services.AddDbContext<ApplicationDatabase>(options => options.UseSqlServer(Configuration.GetConnectionString("sqlDatabase")));
         }
 
@@ -80,6 +82,7 @@ namespace AccountingAPI
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My first API V1");
             });
+
         }
     }
 }

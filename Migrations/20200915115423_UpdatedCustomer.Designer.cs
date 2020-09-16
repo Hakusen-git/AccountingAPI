@@ -3,14 +3,16 @@ using AccountingAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AccountingAPI.Migrations
 {
     [DbContext(typeof(ApplicationDatabase))]
-    partial class ApplicationDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20200915115423_UpdatedCustomer")]
+    partial class UpdatedCustomer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,13 +42,15 @@ namespace AccountingAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CustomerID")
-                        .IsRequired()
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerID1")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("AccountID");
 
-                    b.HasIndex("CustomerID");
+                    b.HasIndex("CustomerID1");
 
                     b.ToTable("Account");
                 });
@@ -70,9 +74,7 @@ namespace AccountingAPI.Migrations
                 {
                     b.HasOne("AccountingAPI.Models.Customer", null)
                         .WithMany("Accounts")
-                        .HasForeignKey("CustomerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerID1");
                 });
 #pragma warning restore 612, 618
         }

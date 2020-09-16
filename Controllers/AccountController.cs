@@ -6,6 +6,7 @@ using AccountingAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace AccountingAPI.Controllers
@@ -15,10 +16,12 @@ namespace AccountingAPI.Controllers
     public class AccountController : ControllerBase
     {
         private readonly ApplicationDatabase _context;
+        private IConfiguration _config;
 
-        public AccountController(ApplicationDatabase context)
+        public AccountController(ApplicationDatabase context, IConfiguration config)
         {
             _context = context;
+            _config = config;
         }
 
         [HttpGet]
@@ -57,7 +60,7 @@ namespace AccountingAPI.Controllers
 
         [HttpPost]
         [Route("AddAccount")]
-        public async Task<ActionResult<Account>> AddAccount(int id, Account account)
+        public async Task<ActionResult<Account>> AddAccount(string id, Account account)
         {
             account.CustomerID = id;
             _context.Account.Add(account);

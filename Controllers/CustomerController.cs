@@ -23,11 +23,12 @@ namespace AccountingAPI.Controllers
 
         [HttpGet]
         [Route("GetAccounts")]
-        public async Task<ActionResult<Customer>> GetAccounts(int id)
+        public async Task<ActionResult<Customer>> GetAccounts(string id)
         {
             var customer = await _context.Customer
                 .Include(c => c.Accounts)
                 .FirstOrDefaultAsync(c => c.CustomerID == id);
+
 
 
             if (customer == null)
@@ -67,8 +68,9 @@ namespace AccountingAPI.Controllers
 
         [HttpPost]
         [Route("AddCustomer")]
-        public async Task<ActionResult<Customer>> AddCustomer(Customer customer)
+        public async Task<ActionResult<Customer>> AddCustomer(string id, Customer customer)
         {
+            customer.CustomerID = id;
             _context.Customer.Add(customer);
             await _context.SaveChangesAsync();
 

@@ -24,6 +24,6 @@ namespace AccountingAPI.Models
         public string AccountDate { get; set; }
 
         [Required]
-        public int CustomerID { get; set; }
+        public string CustomerID { get; set; }
     }
 }
